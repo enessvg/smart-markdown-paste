@@ -1,0 +1,61 @@
+{
+  "name": "smart-markdown-paste",
+  "displayName": "Smart Markdown Paste",
+  "description": "Align multi-line pasted text with the cursor indentation in Markdown files.",
+  "version": "0.1.0",
+  "publisher": "enessvg",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "paste",
+    "indent",
+    "indentation"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onLanguage:markdown",
+    "onCommand:smartMarkdownPaste.paste"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "smartMarkdownPaste.paste",
+        "title": "Smart Markdown Paste: Paste With Indentation"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "smartMarkdownPaste.paste",
+        "key": "ctrl+v",
+        "mac": "cmd+v",
+        "when": "editorTextFocus && !editorReadonly && editorLangId == markdown"
+      }
+    ],
+    "configuration": {
+      "title": "Smart Markdown Paste",
+      "properties": {
+        "smartMarkdownPaste.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically align multi-line pastes in Markdown editors. Disable to use the native paste command."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check": "node --check src/extension.js && node --check src/paste.js && npm test",
+    "package:vsix": "npx @vscode/vsce package --no-dependencies"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/enessvg/smart-markdown-paste.git"
+  }
+}
